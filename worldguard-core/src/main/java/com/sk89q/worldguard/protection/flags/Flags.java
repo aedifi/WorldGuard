@@ -199,6 +199,8 @@ public final class Flags {
 
     public static final RegistryFlag<GameMode> GAME_MODE = register(new RegistryFlag<>("game-mode", GameMode.REGISTRY));
 
+    public static final BooleanFlag IGNORE_Y_AXIS = register(new BooleanFlag("ignore-y-axis"));
+
     private static final Number[] DELAY_VALUES = {0, 1, 5};
     private static final Number[] VITALS_VALUES = {0, 5, 10, 20};
     private static final Number[] VITALS_MINS = {0, 10};

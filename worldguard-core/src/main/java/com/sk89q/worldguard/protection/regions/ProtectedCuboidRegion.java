@@ -24,6 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.flags.Flags;
 import com.sk89q.worldguard.util.MathUtils;
 
 import java.awt.Rectangle;
@@ -131,6 +132,13 @@ public class ProtectedCuboidRegion extends ProtectedRegion {
         final double x = pt.x();
         final double y = pt.y();
         final double z = pt.z();
+
+        Boolean ignoreY = getFlag(Flags.IGNORE_Y_AXIS);
+        if (ignoreY != null && ignoreY) {
+            return x >= min.x() && x < max.x() + 1
+                    && z >= min.z() && z < max.z() + 1;
+        }
+		
         return x >= min.x() && x < max.x() + 1
                 && y >= min.y() && y < max.y() + 1
                 && z >= min.z() && z < max.z() + 1;

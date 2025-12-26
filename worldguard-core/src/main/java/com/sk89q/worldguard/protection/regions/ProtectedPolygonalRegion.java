@@ -24,6 +24,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import com.google.common.collect.ImmutableList;
 import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.math.BlockVector3;
+import com.sk89q.worldguard.protection.flags.Flags;
 
 import java.awt.Polygon;
 import java.awt.geom.Area;
@@ -106,7 +107,10 @@ public class ProtectedPolygonalRegion extends ProtectedRegion {
         int targetY = position.y(); // Height
         int targetZ = position.z(); // Depth
 
-        if (targetY < minY || targetY > maxY) {
+        Boolean ignoreY = getFlag(Flags.IGNORE_Y_AXIS);
+        boolean checkY = (ignoreY == null || !ignoreY);
+
+        if (checkY && (targetY < minY || targetY > maxY)) {
             return false;
         }
         //Quick and dirty check.
